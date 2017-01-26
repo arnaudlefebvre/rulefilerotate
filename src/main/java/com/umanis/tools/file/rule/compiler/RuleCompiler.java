@@ -30,10 +30,14 @@ public class RuleCompiler implements RuleCompilerInt {
 			crule.setFromDate(parseDateOrPeriod(rule.getFromStr()).getDate());
 			crule.setToDate(parseDateOrPeriod(rule.getToStr(),crule.getFromDate()).getDate());
 			crule.setEachCalVal(convertPeriod(rule.getEachStr()));
-			try { 
-				crule.setSelect(Integer.parseInt(rule.getSelectstr()));
-			} catch (NumberFormatException nfe) {
-				throw new RuleCompileException("Number of files to select must be greater than 0");
+			if (Constants.SELECT_ALL.equals(rule.getSelectstr())) {
+				crule.setSelect(Integer.MAX_VALUE);
+			} else {
+				try { 
+					crule.setSelect(Integer.parseInt(rule.getSelectstr()));
+				} catch (NumberFormatException nfe) {
+					throw new RuleCompileException("Number of files to select must be greater than 0");				
+				}
 			}
 			if (crule.getSelect() <=0) {
 				throw new RuleCompileException("Number of files to select must be greater than 0");

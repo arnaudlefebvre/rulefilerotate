@@ -4,7 +4,7 @@
 
 	<groupId>com.umanis.tools</groupId>
 	<artifactId>rulefilerotate</artifactId>
-	<version>0.0.6</version>
+	<version>0.0.7</version>
 	<name>rulefilerotate</name>
 
 	<description>portable file cleaner, design to perform deletion based on custom rules.  

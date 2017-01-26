@@ -17,8 +17,8 @@ public final class Constants {
 	//Par exemple sion veut un fichier le 15 de chaque mois, on utilise ****/**/15
 	//Si pour chaque mois j'ai 3 fichier, le 15, le 20 et le 5, le système va itérer sur les 3 fichier de chaque mois,
 	//Et pour chaque fichier, créer une date à partir de la date du fichier et changer dans celle - ci le jour par 15
-	//Si la date du fichier est équivalente à la date du fichier alors il y a match.
-	//Dans le cas de période dynamique, il est possible qu'une unité de temps (EACH) complète ne soit pas compris aux bornes de la période.
+	//Si la date du fichier est équivalente à cette date modifiée alors il y a match.
+	//Dans le cas de période dynamique, il est possible qu'une unité de temps (EACH) complète ne soit pas comprise aux bornes de la période.
 	// Par conséquent il est possible qu'il n'y est pas de match. Si c'est le cas, (TODO option fs forceselect) le premier fichier sera sélectionner
 	// Sinon erreur.(TODO option skipErrors)
 	public static final String REG_PARSE_OPT = "(.*) AT (.*)";
@@ -26,6 +26,8 @@ public final class Constants {
 	
 	public static final String[] FIXED_DATE_FORMATS = { "dd/MM/yyyy", "dd/MM/yyyy HH:mm:ss" };
 	public static final String[] DYN_DATE_FORMATS = { "([0-9\\*]{4})\\/([0-9\\*]{2})\\/([0-9\\*]{2})", "([0-9\\*]{4})\\/([0-9\\*]{2})\\/([0-9\\*]{2}) ([0-9\\*]{2}):([0-9\\*]{2}):([0-9\\*]{2})" };
+	
+	public static final String SELECT_ALL = "ALL";
 	
 	public static final String KEYWD_LAST = "LAST";
 	public static final String KEYWD_FIRST = "FIRST";

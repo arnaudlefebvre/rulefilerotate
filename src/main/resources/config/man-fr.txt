@@ -34,7 +34,7 @@ Un fichier de log par exécution du programme sera créé. Ce fichier contient l
 
 ##3.1 - Règles de sélection :
 
-    La syntaxe des règles est la suivante (à utiliser dans l'option -r ou -f pour un fichier de règle):
+    La syntaxe des règles est la suivante (à utiliser dans l'option -r ou -f pour un fichier de règles):
     FROM (dyn-date) TO (dyn-date) SELECT (x) EACH (time-unit) [AT (dyn-at-dates) ] [(select-mode)]
     où 
     dyn-date     : date fixe au format dd/MM/yyyy ou dd/MM/yyyy HH:mm:ss.

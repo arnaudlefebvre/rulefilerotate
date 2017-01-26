@@ -44,7 +44,7 @@ public class CommandLineBuilder {
 	private String actionsStr;
 	
 	private static final Logger logger = Logger.getLogger(CommandLineBuilder.class);
-	public static final String helpTxt = "java -jar cronfilerm-"+CommandLineBuilder.class.getPackage().getImplementationVersion()+"-jar-with-dependencies.jar -p path [-r rule | -f file] [options] ";
+	public static final String helpTxt = "java [jvm opts] -jar rulefilerotate-"+CommandLineBuilder.class.getPackage().getImplementationVersion()+".jar -p path [-r rule | -f file] [options] ";
 	public static final Comparator<Option> OptionComparator = new Comparator<Option>() {
 		public int compare(Option o1, Option o2) {
     		if (o1 instanceof com.umanis.tools.cli.Option && o2 instanceof com.umanis.tools.cli.Option) {
@@ -108,7 +108,7 @@ public class CommandLineBuilder {
 		if (help.hasOption(Constants.MAN_OPT)) {
 			if (cmd.hasOption(Constants.MAN_OPT)) {				
 				try {					
-				    logger.info(readMan("/man3.txt"));
+				    logger.info(readMan("/"+Constants.MAN_FILE_FR));
 				    printHelp(options);
 					return true;
 				} catch (IOException io) {

@@ -22,7 +22,7 @@ public class RuleFileRotate {
 	public static final String SYS_PROP_LOGPATH = "logpath";
 	public static final String SYS_PROP_LOGPATH_DEF = "./";
 	public static final String SYS_PROP_LOGFNAME = "logfilename";
-	public static final String SYS_PROP_LOGFNAME_DEF = "cronfilerm_";
+	public static final String SYS_PROP_LOGFNAME_DEF = "rulefilerotate_";
 	public static final String SYS_PROP_LOGLEVEL = "loglevel";
 	public static final String SYS_PROP_LOGLEVEL_DEF = "INFO";
 	

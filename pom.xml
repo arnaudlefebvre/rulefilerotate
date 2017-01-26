@@ -41,25 +41,6 @@
 			<version>1.3.2</version>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.slf4j</groupId> -->
-		<!-- <artifactId>log4j-over-slf4j</artifactId> -->
-		<!-- <version>1.7.22</version> -->
-		<!-- <exclusions> -->
-		<!-- <exclusion> -->
-		<!-- <groupId>com.sun.jmx</groupId> -->
-		<!-- <artifactId>jmxri</artifactId> -->
-		<!-- </exclusion> -->
-		<!-- <exclusion> -->
-		<!-- <groupId>com.sun.jdmk</groupId> -->
-		<!-- <artifactId>jmxtools</artifactId> -->
-		<!-- </exclusion> -->
-		<!-- <exclusion> -->
-		<!-- <groupId>javax.jms</groupId> -->
-		<!-- <artifactId>jms</artifactId> -->
-		<!-- </exclusion> -->
-		<!-- </exclusions> -->
-		<!-- </dependency> -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -117,7 +98,7 @@
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 						</manifest>
 						<manifestEntries>
-							<Class-Path>.</Class-Path> <!-- HERE IS THE IMPORTANT BIT -->
+							<Class-Path>.</Class-Path> <!-- HERE IS THE IMPORTANT BIT TO CREATE FULL PORTABLE JAR -->
 						</manifestEntries>
 					</archive>
 					<outputDirectory>.</outputDirectory>

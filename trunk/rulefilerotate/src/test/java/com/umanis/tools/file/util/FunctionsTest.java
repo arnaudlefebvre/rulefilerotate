@@ -1,16 +1,47 @@
 package com.umanis.tools.file.util;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class FunctionsTest extends TestCase {
 
-	public void testFunctions() {
-		fail("Not yet implemented");
-	}
+	 /**
+     * Create the test case
+     *
+     * @param testName name of the test case
+     */
+    public FunctionsTest( String testName )
+    {
+        super( testName );
+    }
 
-	public void testRoundMiliTime() {
-		fail("Not yet implemented");
-	}
+    /**
+     * @return the suite of tests being tested
+     */
+    public static Test suite()
+    {
+        TestSuite suite = new TestSuite( FunctionsTest.class );
+        //suite.addTest(test);
+        return suite;
+    }
+
+    /**
+     * Rigourous Test :-)
+     */
+    public void testFunctions()
+    {
+        assertTrue( true );
+        System.out.println("test !");
+    }
+    
+    public void testRoundTimeMillis() {
+    	assertEquals(125035.0,Functions.roundMiliTime(125035, 0));
+    	assertEquals(12503.5,Functions.roundMiliTime(125035, 1));
+    	assertEquals(1250.35,Functions.roundMiliTime(125035, 2));
+    	assertEquals(125.035,Functions.roundMiliTime(125035, 3));
+    	assertEquals(0.125035,Functions.roundMiliTime(125035, 6));
+    }
 
 	public void testGetFilePathWithoutExtension() {
 		fail("Not yet implemented");

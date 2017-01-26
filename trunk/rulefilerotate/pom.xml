@@ -5,7 +5,7 @@
 	<groupId>com.umanis.tools</groupId>
 	<artifactId>rulefilerotate</artifactId>
 	<version>0.0.6</version>
-	<name>RuleFileRotate</name>
+	<name>rulefilerotate</name>
 
 	<description>portable file cleaner, design to perform deletion based on custom rules.  
   Write rules for files you want to select each day, each month, during each day, etc. And zip, move or delete other files</description>
@@ -109,6 +109,26 @@
 						<phase>package</phase> <!-- bind to the packaging phase -->
 						<goals>
 							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<configuration>
+							<tasks>
+								<echo>Creating final jar</echo>
+								<copy verbose="true" 
+              file="${project.build.finalName}-jar-with-dependencies.jar"
+              tofile="${project.name}.jar"/>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>

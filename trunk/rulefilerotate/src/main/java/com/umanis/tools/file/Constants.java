@@ -1,11 +1,10 @@
 package com.umanis.tools.file;
 
-import org.apache.commons.cli.OptionBuilder;
-
 import com.umanis.tools.cli.Option;
 
 public final class Constants {
 	public static final Integer FIXED_WIDTH = 100;
+	public static final String MAN_FILE_FR = "man-fr.txt";
 	
 	/** INPUT PARAMETERS **/
 	public static final String RULE_OPT = "r";

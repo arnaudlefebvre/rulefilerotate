@@ -1,0 +1,7 @@
+implémenter AT avec date fixe DONE
+implémenter AT avec date variable DONE
+implémenter sélection par espacement maximum DONE
+implémenter le choix d'appliquer les actions sur la sélection ou l'inverse (par défaut l'inverse)
+skipFileError
+failOnRuleEmpty
+ 

@@ -214,6 +214,8 @@ public class CommandLineBuilder {
 		options.addOption(Constants.MAN);
 		formatter.setOptionComparator(OptionComparator);				
 		SystemOutToSlf4j.enableForClass(CommandLineBuilder.class);
+		System.out.println("Umanis 2017. Provided by alefebvre@umanis.com");
+		System.out.println("Support : http://u-project2.umanis.com/set_project.php?project_id=255");
 		formatter.printHelp(helpTxt, options);		
 		SystemOutToSlf4j.disable();
 	}

@@ -161,6 +161,48 @@ public class Rule extends CompiledRule {
 		return result;
 	}
 	
+	private Boolean isFuckingWrongAutoresolve(FileItem random) {
+		logger.debug("isFuckingWrongAutoresolve");
+		boolean result = false;
+		for (RuleDynDate rdd : this.getDates()) {
+			Boolean ruleMatch = false;
+			if (rdd.isDyn()) {	
+				Calendar cal = Calendar.getInstance();
+				cal.setTime(random.getKey());
+				logger.debug("isFuckingWrongAutoresolve Current : "+Constants.sdfout.format(cal.getTime())+", rdd : "+rdd.getDateStr()+", regex : "+rdd.getDateStrToRegex());
+				Pattern pattern;
+				Matcher matcher;
+				pattern = Pattern.compile(rdd.getDateStrToRegex());
+				matcher = pattern.matcher(rdd.getDateStr());
+				while (matcher.find()) {
+					for (int i = 0; i < matcher.groupCount(); i++) {
+						if (groupisFixed(matcher.group(i))) {
+							cal.set(matchGroupIdxToCal(i),Integer.parseInt(matcher.group(i)));
+						}										
+					}									
+				}
+				logger.debug("isFuckingWrongAutoresolve Compare file : "+Constants.sdfout.format((random).getKey())+", computed : "+Constants.sdfout.format(cal.getTime()));
+				if (cal.getTime().compareTo((random).getKey()) == 0) {
+					if (!ruleMatch) {
+						result = true;
+						logger.debug("isFuckingWrongAutoresolve WINNER : "+Constants.sdfout.format((random).getKey()));
+					}							
+				}
+				
+			} else {
+				Date dt = (random).getKey();
+				if (dt.compareTo(rdd.getDate()) == 0) {								
+					if (!ruleMatch) {
+						result = true;
+						logger.debug("isFuckingWrongAutoresolve WINNER : "+Constants.sdfout.format((random).getKey()));
+					}
+					
+				}
+			}
+		}
+		return result;
+	}
+	
 	public void selectByDates(boolean autoresolve) throws RuleException{
 		HashMap<Long,Item> tmphits = new HashMap<Long,Item>();
 		for (Entry<Long, HashMap<Long,Item>> e : this.hitsByScale.entrySet()) {			
@@ -225,13 +267,7 @@ public class Rule extends CompiledRule {
 								Item random = (Item) e.getValue().values().toArray()[randIdx];
 								logger.debug("FinaHits : "+finalHits);
 								logger.debug("random : "+random+", hascode : "+random.hashCode());
-								//ContainsKey does not work here, don't know why
-//								while (finalHits.containsKey(random.hashCode())) {
-//									randIdx = randomizer.nextInt(e.getValue().values().size());
-//									random = (Item) e.getValue().values().toArray()[randIdx];
-//									logger.debug("new random : "+random+", hascode : "+random.hashCode());
-//								}
-								while (finalHits.containsValue(random)) {
+								while (finalHits.containsValue(random) || isFuckingWrongAutoresolve((FileItem)random) ) {
 									randIdx = randomizer.nextInt(e.getValue().values().size());
 									random = (Item) e.getValue().values().toArray()[randIdx];
 									logger.debug("new random : "+random+", hascode : "+random.hashCode());

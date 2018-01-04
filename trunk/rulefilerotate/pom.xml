@@ -2,9 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.umanis.tools</groupId>
+	<groupId>org.alb.tools</groupId>
 	<artifactId>rulefilerotate</artifactId>
-	<version>0.0.8</version>
+	<version>0.0.9</version>
 	<name>rulefilerotate</name>
 
 	<description>portable file cleaner, design to perform deletion based on custom rules.  
@@ -93,7 +93,7 @@
 					<archive>
 						<manifest>
 							<addClasspath>yes</addClasspath>
-							<mainClass>com.umanis.tools.file.RuleFileRotate</mainClass>
+							<mainClass>org.alb.tools.file.RuleFileRotate</mainClass>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 						</manifest>

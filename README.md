@@ -85,14 +85,14 @@ Un fichier de log par exécution du programme sera créé. Ce fichier contient l
 
 2. Scan du répertoire précisé. Par défaut les sous-dossiers ne sont pas inclus. L'option -s permet de les inclures. Il est possible de filtrer les fichiers en fonction de leur nom à cette étape. Voir l'option -n 
 
-3. Identification de la date de chaque fichier. Cette date est le critère utilisé pour l'application des règles de sélection. Par défaut cette date est la date de modification du fichier. Il est possible d'extraire cette date à partir du nom du fichier en utilisant l' option -k NAME.
-    Dans ce cas les options -e, -c (et -d facultativement) doivent être précisées. 
-        l'option -e permet de préciser un pattern de regexp
-        l'option -c permet de préciser en utilisant les groupes capturés par l'option -e
-        l'option -d permet de préciser le format de conversion en date pour la chaine résultante. 
-        par défaut yyyyMMdd.  
-        ex : Si filename=myapp_x_20161229_y.log, on extrait le 20161229 pour le convertir en date :
-            -e "myapp_.*_([0-9]{4})([0-9]{2})([0-9]{2})_.*.log" -c "$1$2$3" [ -d "yyyyMMdd"]
+3. Identification de la date de chaque fichier. Cette date est le critère utilisé pour l'application des règles de sélection. Par défaut cette date est la date de modification du fichier. Il est possible d'extraire cette date à partir du nom du fichier en utilisant l' option -k NAME.  
+    Dans ce cas les options -e, -c (et -d facultativement) doivent être précisées.   
+        - l'option -e permet de préciser un pattern de regexp et de capturer les groupes de chiffres qui composeront la date  
+        - l'option -c permet de préciser la date crée en utilisant les groupes capturés par l'option -e   (replace)  
+        - l'option -d permet de préciser le format de conversion en date pour la chaine résultante.  
+        par défaut yyyyMMdd.    
+        ex : Si filename=myapp_x_20161229_y.log, on extrait le 20161229 pour le convertir en date :  
+            -e "myapp_.*_([0-9]{4})([0-9]{2})([0-9]{2})_.*.log" -c "$1$2$3" [ -d "yyyyMMdd"]   
 
 4. Activation des règles. La liste des fichiers scannés est parcourue. Chacune des règles filtre alors les fichiers en fonction de l'appartenance de leur clé à l'intervalle FROM-TO. Ces fichiers sont répartis dans les périodes de la règle (Cf.#1) en fonction de l'unité de temps séparant chaque sélection (time-unit)
 
@@ -104,14 +104,14 @@ Un fichier de log par exécution du programme sera créé. Ce fichier contient l
         peut être paramétrée pour chaque règle via select-mode. Voir description détaillée 
         des règles.
         
-        Par défaut le mode de sélection est DEFAULT. 
-            DEFAULT : Sélection par espacement maximum. Les fichiers sont sélectionnés de manière 
+       - Par défaut le mode de sélection est DEFAULT.   
+             - DEFAULT : Sélection par espacement maximum. Les fichiers sont sélectionnés de manière 
             à laisser le plus de distance possible (au sens date) entre eux et les bornes de 
             l'intervalle. Par ex 3/jour: Sélection des fichiers dont la clé est la plus proche 
-            de 6h, puis de 12h, puis de 18h.
-            RANDOM : Sélection random
-            FIRST(DEPRECATED) : Sélection des premiers résultats (non recommandé)
-            LAST(DEPRECATED) : Sélection des derniers résultats (non recommandé)
+            de 6h, puis de 12h, puis de 18h.  
+             - RANDOM : Sélection random  
+             - FIRST(DEPRECATED) : Sélection des premiers résultats (non recommandé)  
+             - LAST(DEPRECATED) : Sélection des derniers résultats (non recommandé)  
     
     - Avec sélection par date (règle avec clause AT)
         La sélection est d'abord effectuée en fonction de ces dates. Si pour une des périodes de 
@@ -128,8 +128,7 @@ Enfin, un rapport de sélection est affiché/loggé.
 7. Applications des actions. Elles sont facultatives. Chaque fichier sélectionné par les règles est archivé, copié ou supprimé en fonction des options précisées. Voir les options -z -m -fd
 
 # 4 - HELP :
-Provided by Arnaud Lefebvre (contact@arnaud-lefebvre.fr)  
-usage: java [jvm opts] -jar rulefilerotate-0.0.9.jar -p path [-r rule | -f file] [options]  
+usage: java [jvm opts] -jar rulefilerotate.jar -p path [-r rule | -f file] [options]  
 -h,--help                       Print this message  
 -man,--manual                   Print manual  
 -p,--path <folder path>         REQUIRED : Folder path to scan, use double-quotes if spaces    
@@ -146,6 +145,6 @@ usage: java [jvm opts] -jar rulefilerotate-0.0.9.jar -p path [-r rule | -f file]
 -da,--dis-autoresolve           OPTIONAL : Disable autoresolve for rule files selection  
 -skip,--skip-error              OPTIONAL : Skip error when performing actions on file. Files will not be deleted (-fd option) if previous action failed  
 -d,--df <java date pattern>     MANDATORY if key is NAME : Simple Date format used to create date object from date extracted on file name. (Default : yyyyMMdd). See -e and -c options. See https://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html  
--c,--dreplace <regex replace>   MANDATORY if key is NAME : Use matching group on file name with extract regex option. See -e and -d options. Example For myapp_x_20161229_y.log :pattern=myapp_.*_([0-9]{4})([0-9]{2})([0-9]{2})_.*.log and replace=$1$2$3  
--e,--extract <regex pattern>    MANDATORY if key is NAME : Simple date extractor from file name. Use regex and groups to extract date. See -c and -d options. Example For myapp_x_20161229_y.log : pattern=myapp_.*_([0-9]{4})([0-9]{2})([0-9]{2})_.*.log and replace=$1$2$3`  
+-c,--dreplace <regex replace>   MANDATORY if key is NAME : Use matching group on file name with extract regex option. See -e and -d options. Example For myapp_x_20161229_y.log : -e myapp_.*_([0-9]{4})([0-9]{2})([0-9]{2})_.*.log and -d  $1$2$3 (with default -d option)`    
+-e,--extract <regex pattern>    MANDATORY if key is NAME : Simple date extractor from file name. Use regex and groups to extract date. See -c and -d options. Example For myapp_x_20161229_y.log : -e myapp_.*_([0-9]{4})([0-9]{2})([0-9]{2})_.*.log and -d  $1$2$3 (with default -d option)`  
                                 
